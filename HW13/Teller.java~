@@ -1,0 +1,8 @@
+public class Teller {
+
+    public static void main (String args[]) {
+	BankAccount test1 = new BankAccount();
+	
+    }
+
+}

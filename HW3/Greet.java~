@@ -1,0 +1,10 @@
+public class Greet {
+
+    public static void main( String[] args ){
+	greet("Ryan Siu");
+    }
+    public static String[] greet( String[] args ){
+	return "Hello, " + args;
+    }
+
+}

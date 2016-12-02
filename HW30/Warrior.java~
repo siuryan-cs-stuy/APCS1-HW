@@ -1,0 +1,53 @@
+// Team FileNotFound
+
+public class Warrior {
+    
+    private String name;
+    private int hp;
+    private int strength;
+    private int defense;
+    private double attRate;
+
+    public Warrior (String newName) {
+	this.name = newName;
+	hp = 110;
+	strength = 125;
+	defense = 115;
+	attRate = 0.25;
+    }
+
+    public boolean isAlive() {
+	return hp > 0;
+    }
+
+    public int getDefense() {
+	return this.defense;
+    }
+
+    public String getName() {
+	return this.name;
+    }
+
+    public void lowerHP (int damage) {
+	this.hp -= damage;
+    }
+
+    public int attack (Monster m) {
+	int damage = (int)(this.strength * this.attRate) - m.defense;
+	if (damage < 0) {
+	    damage = 0;
+	}
+	return damage;
+    }
+
+    public void specialize() {
+	this.defense -= 10;
+	this.attRate *= 1.5;
+    }
+
+    public void normalize() {
+	this.defense += 10;
+	this.attRate /= 1.5;
+    }
+
+}

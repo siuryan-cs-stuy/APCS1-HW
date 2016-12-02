@@ -1,0 +1,14 @@
+// Ryan Siu
+// APCS1 pd5
+// HW6
+// 2016-09-21
+
+public class Greet {
+
+    public static void main( String[] args ){
+	
+	BigSib.greet("Stills");
+	BigSib.greet("Nash");
+    }
+
+}
