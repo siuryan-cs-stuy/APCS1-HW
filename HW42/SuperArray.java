@@ -1,10 +1,10 @@
-// Ryan Siu
+// Ryan Siu and Rihui Zheng
 // APCS1 pd5
-// HW41 -- Array of Steel
-// 2016-12-07
+// HW42 -- Array of Grade 316
+// 2016-12-08
 
 /*==================================================
-  class SuperArray version 1.0
+  class SuperArray version 2.0
   Wrapper class for array. Facilitates resizing, 
   expansion, and read/write capability on elements.
   ==================================================*/
@@ -58,71 +58,94 @@ public class SuperArray
     {
 	int oldValue = _data[index];
         _data[index] = newVal;
-	_size++;
 	if (index > _lastPos) {
 	    _lastPos = index;
 	}
 	return oldValue;
     }
 
+    //adds an item after the last item
     public void add( int newVal )
     {
 	expand();
 	_data[_lastPos+=1] = newVal;
-	_lastPos++;
     }
 
+    //inserts an item at index
+    //shifts existing elements to the right
     public void add( int index, int newVal )
     {
 	expand();
-	for (int n = _lastPos; n >= index; n --) {
+	for (int n = _lastPos; n >= index; n--) {
 	    _data[n+1] = _data[n];
 	}
 	_data[index] = newVal;
-	_lastPos ++;
+	_lastPos++;
     }
+
+    //inserts an item at index
+    //shifts existing elements to the right
     public void remove( int index )
     {
-	for (int n = index; n < _lastPos - 1; n ++) {
-	    _data[index] = _data[index + 1];
+	for (int n = index; n < _lastPos; n++) {
+	    _data[n] = _data[n+1];
 	}
 	_data[_lastPos] = 0;
-	_lastPos --;
+	_lastPos--;
+    }
+
+    //return number of meaningful items in _data
+    public int size() 
+    {
+        return _lastPos + 1;
     }
     
     //main method for testing
     public static void main( String[] args ) 
     {
 	
-	  SuperArray curtis = new SuperArray();
-	  System.out.println( "Printing empty SuperArray curtis..." );
-	  System.out.println( curtis );
-	  
-	  for( int i = 0; i < curtis._data.length; i++ ) {
-	      curtis.set( i, i * 2 );
-	  }
+	SuperArray curtis = new SuperArray();
+	System.out.println("Printing empty SuperArray curtis...");
+	System.out.println(curtis);
 
-	  System.out.println("Printing populated SuperArray curtis...");
-	  System.out.println(curtis);
+	for( int i = 0; i < curtis._data.length; i++ ) {
+	    curtis.set(i,i*2);
+	    curtis._size++;
+	}
 
-	  for( int i = 0; i < 3; i++ ) {
-	      curtis.expand();
-	      System.out.println("Printing expanded SuperArray curtis...");
-	      System.out.println(curtis);
-	      System.out.println("new length of underlying array: " 
-				 + curtis._data.length );
-	  }
+	System.out.println("Printing populated SuperArray curtis...");
+	System.out.println(curtis);
 
-	  SuperArray curt = new SuperArray();
-	  for( int i = 0; i < curt._data.length; i++ ) {
-	      curt.set( i, i * 2 );
-	  }
-	  System.out.println("Printing SuperArray curt with 1337 added...");
-	  curt.add(4,1337);
-	  System.out.println(curt);
-	  curt.remove(4);
-	  System.out.println(curt);
-	  
+	SuperArray mayfield = new SuperArray();
+	System.out.println("Printing empty SuperArray mayfield...");
+	System.out.println(mayfield);
+
+	mayfield.add(5);
+	mayfield.add(4);
+	mayfield.add(3);
+	mayfield.add(2);
+	mayfield.add(1);
+
+	System.out.println("Printing populated SuperArray mayfield...");
+	System.out.println(mayfield);
+
+	mayfield.remove(3);
+	System.out.println("Printing SuperArray mayfield post-remove...");
+	System.out.println(mayfield);
+	mayfield.remove(3);
+	System.out.println("Printing SuperArray mayfield post-remove...");
+	System.out.println(mayfield);
+
+	mayfield.add(3,99);
+	System.out.println("Printing SuperArray mayfield post-insert...");
+	System.out.println(mayfield);
+	mayfield.add(2,88);
+	System.out.println("Printing SuperArray mayfield post-insert...");
+	System.out.println(mayfield);
+	mayfield.add(1,77);
+	System.out.println("Printing SuperArray mayfield post-insert...");
+	System.out.println(mayfield);
+	
     }//end main()
 
 }//end class SuperArray
