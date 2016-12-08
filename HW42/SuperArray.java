@@ -1,4 +1,4 @@
-// Ryan Siu and Rihui Zheng
+// Ryan Siu and Rihui Zheng - Team Coefficient of Determination
 // APCS1 pd5
 // HW42 -- Array of Grade 316
 // 2016-12-08
