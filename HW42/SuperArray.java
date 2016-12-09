@@ -67,20 +67,27 @@ public class SuperArray
     //adds an item after the last item
     public void add( int newVal )
     {
-	expand();
-	_data[_lastPos+=1] = newVal;
+	if (_size == _data.length) {
+	    expand();
+	}
+	_lastPos++;
+        set( _lastPos, newVal );
+	_size++;
     }
 
     //inserts an item at index
     //shifts existing elements to the right
     public void add( int index, int newVal )
     {
-	expand();
+	if (_size == _data.length) {
+	    expand();
+	}
 	for (int n = _lastPos; n >= index; n--) {
-	    _data[n+1] = _data[n];
+	    set( n+1, _data[n] );
 	}
 	_data[index] = newVal;
 	_lastPos++;
+	_size++;
     }
 
     //inserts an item at index
@@ -92,12 +99,13 @@ public class SuperArray
 	}
 	_data[_lastPos] = 0;
 	_lastPos--;
+	_size--;
     }
 
     //return number of meaningful items in _data
     public int size() 
     {
-        return _lastPos + 1;
+        return _size;
     }
     
     //main method for testing
