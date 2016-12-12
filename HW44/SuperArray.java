@@ -18,7 +18,7 @@
 
 public class SuperArray implements List
 {
-    private int[] _data;  //underlying container structure
+    private Object[] _data;  //underlying container structure
     private int _lastPos; //marker for last meaningful value
     private int _size;    //number of meaingful values
 
@@ -26,7 +26,7 @@ public class SuperArray implements List
     //initializes 10-item array
     public SuperArray() 
     { 
-	_data = new int[10];
+	_data = new Object[10];
 	_lastPos = -1;
 	_size = 0;
     }
@@ -37,7 +37,7 @@ public class SuperArray implements List
     public String toString() 
     { 
         String s = "[";
-	for (int a : _data) {
+	for (Object a : _data) {
 	    s += a + ",";
 	}
 	if (s.length() > 1) {
@@ -50,7 +50,7 @@ public class SuperArray implements List
     //double capacity of this instance of SuperArray 
     private void expand() 
     { 
-	int[] copy = new int[_data.length*2];
+	Object[] copy = new Object[_data.length*2];
 	for (int i = 0; i <= _lastPos; i++) {
 	    copy[i] = _data[i];
 	}
@@ -68,13 +68,13 @@ public class SuperArray implements List
     //mutator method -- set index to newVal, return old value at index
     public Object set( int index, Object o ) 
     {
-	int oldValue = _data[index];
+	Object oldValue = _data[index];
         _data[index] = o;
 	return oldValue;
     }
 
     //adds an item after the last item
-    public void add( Object o )
+    public boolean add( Object o )
     {
 	if (size() == _data.length) {
 	    expand();
@@ -105,13 +105,18 @@ public class SuperArray implements List
 
     //inserts an item at index
     //shifts existing elements to the right
-    public void remove( int index )
+    public Object remove( int index )
     {
+	if (index < 0 || index >= size()) {
+	    throw new IndexOutOfBoundsException("\nindex input is not a valid index");
+	}
+	Object oldValue = _data[index];
 	for (int n = index; n < _lastPos; n++) {
 	    _data[n] = _data[n+1];
 	}
 	_lastPos--;
 	_size--;
+	return oldValue;
     }
 
     //return number of meaningful items in _data
@@ -123,32 +128,22 @@ public class SuperArray implements List
     //main method for testing
     public static void main( String[] args ) 
     {
-	
-	SuperArray curtis = new SuperArray();
-	System.out.println("Printing empty SuperArray curtis...");
-	System.out.println(curtis);
 
-	for( int i = 0; i < curtis._data.length; i++ ) {
-	    curtis.set(i,i*2);
-	    curtis._size++;
-	}
-
-	System.out.println("Printing populated SuperArray curtis...");
-	System.out.println(curtis);
-
-	ListInt mayfield = new SuperArray();
+	List mayfield = new SuperArray();
 	System.out.println("Printing empty SuperArray mayfield...");
 	System.out.println(mayfield);
 
-	mayfield.add(5);
+	int[] test = {3,4,5};
+	mayfield.add("hello");
 	mayfield.add(4);
-	mayfield.add(3);
-	mayfield.add(2);
+	mayfield.add(3.4f);
+	mayfield.add(test);
 	mayfield.add(1);
-
+	
 	System.out.println("Printing populated SuperArray mayfield...");
 	System.out.println(mayfield);
 
+	/*
 	mayfield.remove(3);
 	System.out.println("Printing SuperArray mayfield post-remove...");
 	System.out.println(mayfield);
@@ -164,7 +159,7 @@ public class SuperArray implements List
 	System.out.println(mayfield);
 	mayfield.add(1,77);
 	System.out.println("Printing SuperArray mayfield post-insert...");
-	System.out.println(mayfield);
+	System.out.println(mayfield);*/
 	
     }//end main()
 
