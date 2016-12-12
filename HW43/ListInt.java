@@ -6,12 +6,12 @@
 
 public interface ListInt {
 
-    //adds an item after the last item
-    void add( int index, int newVal );
-
     //inserts an item at index
     //shifts existing elements to the right
-    void add( int index );
+    void add( int index, int newVal );
+
+    //adds an item after the last item
+    void add( int newVal );
 
     //inserts an item at index
     //shifts existing elements to the right

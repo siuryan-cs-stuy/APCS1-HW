@@ -1,7 +1,7 @@
-// Ryan Siu and Rihui Zheng - Team Coefficient of Determination
+// Ryan Siu and Tiffany Moi -- Team <tr>
 // APCS1 pd5
-// HW42 -- Array of Grade 316
-// 2016-12-08
+// HW43 -- Array of Titanium
+// 2016-12-11
 
 /*==================================================
   class SuperArray version 3.0
@@ -123,7 +123,7 @@ public class SuperArray implements ListInt
 	System.out.println("Printing populated SuperArray curtis...");
 	System.out.println(curtis);
 
-	SuperArray mayfield = new SuperArray();
+	ListInt mayfield = new SuperArray();
 	System.out.println("Printing empty SuperArray mayfield...");
 	System.out.println(mayfield);
 
