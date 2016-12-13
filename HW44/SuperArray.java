@@ -1,10 +1,10 @@
-// Ryan Siu and Tiffany Moi -- Team <tr>
+// Ryan Siu
 // APCS1 pd5
-// HW43 -- Array of Titanium
-// 2016-12-11
+// HW44 -- In America, the Driver Sits on the Left
+// 2016-12-12
 
 /**************************************************
-  class SuperArray version 3.0
+  class SuperArray version 4.0
   Wrapper class for array. Facilitates 
   *  resizing 
   *  expansion 
@@ -13,7 +13,7 @@
   *  adding an element at specified index
   *  removing an element at specified index
   ...and now SuperArray complies with the specifications of the 
-  ListInt interface. (ListInt.java must be in same dir as this file)
+  List interface. (List.java must be in same dir as this file)
 **************************************************/
 
 public class SuperArray implements List
@@ -140,26 +140,17 @@ public class SuperArray implements List
 	mayfield.add(test);
 	mayfield.add(1);
 	
-	System.out.println("Printing populated SuperArray mayfield...");
+	System.out.println("Printing populated List mayfield...");
 	System.out.println(mayfield);
 
-	/*
-	mayfield.remove(3);
-	System.out.println("Printing SuperArray mayfield post-remove...");
+	System.out.println("Printing third element of List mayfield...");
+        System.out.println( mayfield.get(3) );
+	System.out.println("Changing third element of List mayfield...");
+	mayfield.set(3, "test string");
 	System.out.println(mayfield);
-	mayfield.remove(3);
-	System.out.println("Printing SuperArray mayfield post-remove...");
-	System.out.println(mayfield);
-
-	mayfield.add(3,99);
-	System.out.println("Printing SuperArray mayfield post-insert...");
-	System.out.println(mayfield);
-	mayfield.add(2,88);
-	System.out.println("Printing SuperArray mayfield post-insert...");
-	System.out.println(mayfield);
-	mayfield.add(1,77);
-	System.out.println("Printing SuperArray mayfield post-insert...");
-	System.out.println(mayfield);*/
+	System.out.println("Size of List mayfield...");
+	System.out.println( mayfield.size() );
+	
 	
     }//end main()
 
