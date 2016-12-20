@@ -1,7 +1,7 @@
 // Ryan Siu
 // APCS1 pd5
-// HW46 -- ascending
-// 2016-12-14
+// HW48 -- Halving the Halves
+// 2016-12-19
 
 /*============================================
   class OrderedArrayList
