@@ -1,3 +1,8 @@
+// Ryan Siu
+// APCS1 pd5
+// HW50 -- Selection
+// 2016-12-21
+
 /*======================================
   class SelectionSort -- implements SelectionSort algorithm
   ======================================*/
@@ -31,18 +36,7 @@ public class SelectionSort
         }
     }
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    private Comparable posOfMax( ArrayList<Comparable> data, int maxPos) {
-	Comparable max = data.get(maxPos);
-	for (int i = maxPos; i > 0; i--) {
-	    if (max.compareTo(data.get(i-1)) < 0) {
-		max = data.get(i-1);
-		maxPos = i;
-	    }
-	}
-	return maxPos;
-    }
-
+    
 
     // VOID version of SelectionSort
     // Rearranges elements of input ArrayList
@@ -52,12 +46,16 @@ public class SelectionSort
     //note: this version places greatest value at rightmost end,
 
     //maxPos will point to position of SELECTION (greatest value)
-	int maxPos = data.size()-1;
+	int maxPos;
         
-	for (int i = 0; i < maxPos; i++) {
-	    for (int j = maxPos; j > 0; j--) {
-	        
+	for (int i = data.size()-1; i >= 0; i--) {
+	    maxPos = i;
+	    for (int j = maxPos; j >= 0; j--) {
+		if (data.get(maxPos).compareTo( data.get(j) ) < 0) {
+		    maxPos = j;
+		}
 	    }
+	    data.set( i, data.set( maxPos, data.get(i) ));
 	}
 
     }//end selectionSort
@@ -67,14 +65,23 @@ public class SelectionSort
     // postcondition: order of input ArrayList's elements unchanged
     //                Returns sorted copy of input ArrayList.
     public static ArrayList<Comparable> selectionSort( ArrayList<Comparable> input ) 
-{
-        
+    {
+	
+	ArrayList<Comparable> data = new ArrayList<Comparable>();
+	for (Comparable c : input) {
+	    data.add(c);
+	}
+
+	selectionSortV(data);
+	return data;
+	
     }//end selectionSort 
 
 
     public static void main( String [] args ) 
 {
 
+    /*
 	ArrayList glen = new ArrayList<Integer>();
 	glen.add(7);
 	glen.add(1);
@@ -84,15 +91,13 @@ public class SelectionSort
 	System.out.println( "ArrayList glen before sorting:\n" + glen );
 	selectionSortV(glen);
 	System.out.println( "ArrayList glen after sorting:\n" + glen );
-
-	/*===============for VOID methods=============
+    
 	ArrayList coco = populate( 10, 1, 1000 );
 	System.out.println( "ArrayList coco before sorting:\n" + coco );
 	selectionSortV(coco);
 	System.out.println( "ArrayList coco after sorting:\n" + coco );
-	  ============================================*/
+    */
 
-	/*==========for AL-returning methods==========
     	ArrayList glen = new ArrayList<Integer>();
 	glen.add(7);
 	glen.add(1);
@@ -112,7 +117,7 @@ public class SelectionSort
 			    + cocoSorted );
 	System.out.println( "ArrayList coco after sorting:\n" + coco );
 	System.out.println( coco );
-	  ============================================*/
+
 
     }//end main
 
