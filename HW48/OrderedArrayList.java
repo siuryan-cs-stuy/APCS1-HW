@@ -52,6 +52,13 @@ public class OrderedArrayList {
     // inserts newVal at the appropriate index
     // maintains ascending order of elements
     // uses a linear search to find appropriate index
+    // For loop: O(n)
+    // Compare: O(1)
+    // Shifting elements: O(n)
+    // Inserting element: O(1)
+    // O(n) + (O(1) + O(n) + O(1)) = O(2n) + O(2)
+    // O(2n) is the dominating term
+    // addLinear is O(n)
     public void addLinear( Comparable newVal ) {
 	for (int i = 0; i < _data.size(); i++) {
 
@@ -71,47 +78,41 @@ public class OrderedArrayList {
     // inserts newVal at the appropriate index
     // maintains ascending order of elements
     // uses a binary search to find appropriate index
-    public void addBinary( Comparable newVal ) {
+    // Declaring vars: O(1) + O(1) + O(1)
+    // While loop (binary search): O(log2 n)
+    // Shifting elements: O(n)
+    // Inserting element: O(1)
+    // O(1) + O(1) + O(1) + O(log2 n) + O(n) + O(1) = O(n) + O(log2 n) + O(4)
+    // O(n) is the dominating term
+    // addBinary is O(n)
+    public void addBinary( Comparable newVal )
+    { 
+	//initialize high, low, midpt indices
+	int lo = 0;
+	int med = 0;
+	int hi = _data.size()-1;
 
-	// Prevent error when getting value at mid
-	if ( _data.size() == 0 ) {
-	    _data.add(newVal);
-	    return;
-	}
-	
-        int low = 0;
-	int high = _data.size()-1; // to get the highest index
-	int mid = 0;
+	while ( lo <= hi ) { //running until target is found or bounds cross
 
-	// Binary search section
-	while (high >= low) {
-
-	    mid = (low + high) / 2;
-
-	    // Uses the Comparable method compareTo (if newVal is less than
-	    // the value at mid, then a negative integer is returned
-	    if (newVal.compareTo( _data.get(mid) ) < 0) {
-	        high = mid - 1;
-	    } else if (newVal.compareTo( _data.get(mid) ) > 0) {
-		low = mid + 1;
-	    } else {
-	        break;
+	    med = (lo + hi) / 2;
+	    int x = _data.get(med).compareTo( newVal );
+	        
+	    if ( x == 0 ) {
+		//equal value found, insert here
+		_data.add( med, newVal );
+		return;
 	    }
-	    
+	    else if ( x > 0 )
+		//newVal < med, so look at lower half of data
+		hi = med - 1;
+	    else
+		//newVal > med, so look at upper half of data
+		lo = med + 1;
 	}
-
-	// Add section
-	// Compares the value at index mid to newVal
-	// If newVal is greater, insert at index mid + 1
-	// Otherwise if equal or less, insert at index mid
-	if (newVal.compareTo( _data.get(mid) ) > 0) {
-	    _data.add(mid+1, newVal);
-	} else {
-	    _data.add(mid, newVal);
-	}
-	
-	
-    }
+	// If you made it this far, newVal is not present.
+	// So insert at lo.
+	_data.add( lo, newVal );
+    }//end addBinary	
 
 
     // main method solely for testing purposes
