@@ -1,3 +1,8 @@
+// Ryan Siu
+// APCS1 pd5
+// HW55 -- His Toe Grammar
+// 2017-01-05
+
 /***
     An AP-style question, for practice...
 
@@ -56,9 +61,19 @@ public class StatPrinter
     //eg, for data [2,3,2,5,2,3]
     //  _frequency would be [0,0,3,2,0,1]
     public StatPrinter( ArrayList <Integer> data ) 
-    { 
-	/* Your implementation hnyah */
-    }
+    {
+	
+	_frequency = new ArrayList<Integer>();
+	Integer maxVal = max(data);
+	
+	for (int i = 0; i <= maxVal; i++) {
+	    _frequency.add(0);
+	}
+	
+        for (Integer i : data) {
+	    _frequency.set(i, _frequency.get(i) + 1);
+	}
+    } // O(n)
 
 
     //*************** QUESTION 01 **************************
@@ -72,7 +87,8 @@ public class StatPrinter
 		king = i;
 	    }
 	}
-    }
+	return king;
+    } // O(n)
 
 
     //*************** QUESTION 03 **************************
@@ -87,29 +103,63 @@ public class StatPrinter
     //    isLocalMode(5) -> true
     public boolean isLocalMode( int i ) 
     { 
-	/* Your implementation hnyah */
-    }
+	return i > 0
+	    && i < _frequency.size() - 1
+	    &&  _frequency.get( i - 1 ) < _frequency.get( i ) 
+	    &&  _frequency.get( i + 1 ) < _frequency.get( i );
+    } // O(1)
 
 
     //*************** QUESTION 04 **************************
     //postcond: returns list of modes in _frequency
     public ArrayList <Integer> getLocalModes() 
     {
-	/* Your implementation hnyah */
-    }//O(?)
+	
+	ArrayList<Integer> modes = new ArrayList<Integer>();
+	for (int i = 1; i < _frequency.size(); i++) {
+	    if (isLocalMode(i)) {
+		modes.add(i); // amortized O(1)
+	    }
+	}
+	return modes;
+    } // O(n)
 
 
     //*************** QUESTION 05 **************************
     //precond:  longestBar > 0
     public void printHistogram( int longestBar ) 
     { 
-	/* Your implementation hnyah */
-       
-    }//O(?)
+	Integer maxVal = max(_frequency);
+	int factor = longestBar / maxVal;
+	
+	String h = "";
+	for (int i = 0; i < _frequency.size(); i++) {
+	    h += "\n" + i + " : ";
+	    for (int j = 0; j < _frequency.get(i) * factor; j++) {
+		h += "*";
+	    }
+	}
+	System.out.println(h);
+    } // O(n^2)?
 
-    
+    // testing
     public static void main( String[] args ) {
-	StatPrinter s = new StatPrinter();
+	ArrayList<Integer> arr = new ArrayList<Integer>();
+	arr.add(1);
+	arr.add(2);
+	arr.add(1);
+	arr.add(4);
+	arr.add(2);
+	arr.add(3);
+	arr.add(5);
+	arr.add(0);
+	arr.add(2);
+	arr.add(4);
+	System.out.println( arr );
+	StatPrinter s = new StatPrinter( arr );
+	System.out.println( s._frequency );
+	System.out.println( s.getLocalModes() );
+	s.printHistogram(12);
     }
 
  
