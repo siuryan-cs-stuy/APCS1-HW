@@ -137,10 +137,10 @@ public class StatPrinter
 	    h += "\n" + i + " : ";
 	    for (int j = 0; j < _frequency.get(i) * factor; j++) {
 		h += "*";
-	    }
-	}
+	    } // O(1)
+	} // O(n)
 	System.out.println(h);
-    } // O(n^2)?
+    } // O(n)
 
     // testing
     public static void main( String[] args ) {
